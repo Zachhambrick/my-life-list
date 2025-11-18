@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>人生已完成列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            font-size: 10px;
+            min-height: 100vh;
+            padding: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .count {
+            font-size: 11px;
+            font-weight: bold;
+            color: #333;
+        }
+        .list-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px; /* 间距2px，契合极简紧凑要求 */
+        }
+        .list-item {
+            display: inline-block;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+            line-height: 1.4;
+            color: #333;
+            padding: 1px 2px;
+        }
+        .list-item:hover {
+            transform: scale(1.05);
+        }
+        .list-item.active {
+            background-color: #98fb98; /* 柔和绿色高亮 */
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">人生已完成列表</div>
+        <div class="count">已完成：<span id="completeNum">0</span></div>
+    </div>
+    <div class="list-container" id="listContainer">
+        <div class="list-item">送礼物</div>
+        <div class="list-item">被送礼物</div>
+        <div class="list-item">暗恋</div>
+        <div class="list-item">明恋</div>
+        <div class="list-item">失恋</div>
+        <div class="list-item">表白</div>
+        <div class="list-item">被表白</div>
+        <div class="list-item">留长发</div>
+        <div class="list-item">剪短发</div>
+        <div class="list-item">染发</div>
+        <div class="list-item">漂发</div>
+        <div class="list-item">烫发</div>
+        <div class="list-item">化妆</div>
+        <div class="list-item">做美甲</div>
+        <div class="list-item">放下一个人</div>
+        <div class="list-item">有过遗憾</div>
+        <div class="list-item">爱而不得</div>
+        <div class="list-item">双向奔赴</div>
+        <div class="list-item">当海王</div>
+        <div class="list-item">拒绝他人表白</div>
+        <div class="list-item">表白被拒</div>
+        <div class="list-item">被渣</div>
+        <div class="list-item">犯过傻</div>
+        <div class="list-item">装糊涂</div>
+        <div class="list-item">犯校规</div>
+        <div class="list-item">打架</div>
+        <div class="list-item">迟到</div>
+        <div class="list-item">旷课</div>
+        <div class="list-item">上课睡觉</div>
+        <div class="list-item">被叫家长</div>
+        <div class="list-item">喝酒</div>
+        <div class="list-item">抽烟</div>
+        <div class="list-item">纹身</div>
+        <div class="list-item">去清吧</div>
+        <div class="list-item">和朋友去KTV</div>
+        <div class="list-item">断片失眠睡一天</div>
+        <div class="list-item">吵架</div>
+        <div class="list-item">绝交</div>
+        <div class="list-item">晚上一个人哭</div>
+        <div class="list-item">捐血</div>
+        <div class="list-item">住院</div>
+        <div class="list-item">做手术</div>
+        <div class="list-item">会做饭</div>
+        <div class="list-item">做一桌菜</div>
+        <div class="list-item">做饭给家人</div>
+        <div class="list-item">做甜品给喜欢的人</div>
+        <div class="list-item">有超过10年的好朋友</div>
+        <div class="list-item">有个无条件可信任的朋友</div>
+        <div class="list-item">买花</div>
+        <div class="list-item">被送花</div>
+        <div class="list-item">给自己买礼物</div>
+        <div class="list-item">通宵补作业</div>
+        <div class="list-item">一个人散步</div>
+        <div class="list-item">夜跑</div>
+        <div class="list-item">深夜散心</div>
+        <div class="list-item">向陌生人吐露心声</div>
+        <div class="list-item">一个人出去吃饭</div>
+        <div class="list-item">一个人看电影</div>
+        <div class="list-item">摄影</div>
+        <div class="list-item">一个人去酒吧</div>
+        <div class="list-item">一个人过生日</div>
+        <div class="list-item">一个人逛超市</div>
+        <div class="list-item">一个人去图书馆</div>
+        <div class="list-item">一个人看病</div>
+        <div class="list-item">一个人去唱歌</div>
+        <div class="list-item">社死过</div>
+        <div class="list-item">一个人出门逛</div>
+        <div class="list-item">给自己写信</div>
+        <div class="list-item">出国一个人旅游</div>
+        <div class="list-item">跟朋友旅游</div>
+        <div class="list-item">拥有要好的异性朋友</div>
+        <div class="list-item">谈恋爱</div>
+        <div class="list-item">考试不及格</div>
+        <div class="list-item">考试第一名</div>
+        <div class="list-item">当班干部</div>
+        <div class="list-item">竞选学生会</div>
+        <div class="list-item">上电视</div>
+        <div class="list-item">上报纸</div>
+        <div class="list-item">登台演出</div>
+        <div class="list-item">主持节目</div>
+        <div class="list-item">演讲</div>
+        <div class="list-item">野性消费</div>
+        <div class="list-item">买东西被宰</div>
+        <div class="list-item">被老师点名表扬</div>
+        <div class="list-item">被老师点名批评</div>
+        <div class="list-item">全校表扬</div>
+        <div class="list-item">被背叛</div>
+        <div class="list-item">被害</div>
+        <div class="list-item">被坚定选择</div>
+        <div class="list-item">获奖</div>
+        <div class="list-item">学一种语言</div>
+        <div class="list-item">写论文</div>
+        <div class="list-item">写书</div>
+        <div class="list-item">写诗</div>
+        <div class="list-item">写日记</div>
+        <div class="list-item">写剧本</div>
+        <div class="list-item">写歌</div>
+        <div class="list-item">拍影片</div>
+        <div class="list-item">参加比赛</div>
+        <div class="list-item">拍写真</div>
+        <div class="list-item">买相机</div>
+        <div class="list-item">会一种乐器</div>
+        <div class="list-item">有超过5年的兴趣爱好</div>
+        <div class="list-item">参加志愿活动</div>
+        <div class="list-item">自己一个人在外面住过</div>
+        <div class="list-item">看鬼片</div>
+        <div class="list-item">去密室</div>
+        <div class="list-item">去鬼屋</div>
+        <div class="list-item">去游乐场</div>
+        <div class="list-item">去看现场演唱会</div>
+        <div class="list-item">去音乐节</div>
+        <div class="list-item">偶遇明星</div>
+        <div class="list-item">去签售会</div>
+        <div class="list-item">兼职</div>
+        <div class="list-item">打工</div>
+        <div class="list-item">看画展</div>
+        <div class="list-item">捐款</div>
+        <div class="list-item">道歉</div>
+        <div class="list-item">释怀</div>
+        <div class="list-item">失望</div>
+        <div class="list-item">淋雨</div>
+        <div class="list-item">种花</div>
+        <div class="list-item">养宠物</div>
+        <div class="list-item">泡温泉</div>
+        <div class="list-item">跳伞</div>
+        <div class="list-item">坐过山车</div>
+        <div class="list-item">蹦极</div>
+        <div class="list-item">骑马</div>
+        <div class="list-item">卡丁车</div>
+        <div class="list-item">攀岩</div>
+        <div class="list-item">游泳</div>
+        <div class="list-item">滑雪</div>
+        <div class="list-item">滑冰</div>
+        <div class="list-item">旱冰</div>
+        <div class="list-item">滑板</div>
+        <div class="list-item">去野餐</div>
+        <div class="list-item">登山</div>
+        <div class="list-item">看雪</div>
+        <div class="list-item">看海</div>
+        <div class="list-item">看日出</div>
+        <div class="list-item">看日落</div>
+        <div class="list-item">拿驾照</div>
+        <div class="list-item">自驾游</div>
+        <div class="list-item">给父母买衣服</div>
+        <div class="list-item">当作红娘</div>
+        <div class="list-item">摆地摊</div>
+        <div class="list-item">社团活动</div>
+        <div class="list-item">组建社团</div>
+        <div class="list-item">写信</div>
+        <div class="list-item">独自坐飞机</div>
+        <div class="list-item">拼拼图</div>
+        <div class="list-item">办生日会</div>
+        <div class="list-item">健身</div>
+        <div class="list-item">买名牌</div>
+        <div class="list-item">开网店</div>
+        <div class="list-item">练字</div>
+        <div class="list-item">沉迷游戏</div>
+        <div class="list-item">拍毕业照</div>
+        <div class="list-item">面试成功</div>
+        <div class="list-item">放孔明灯</div>
+        <div class="list-item">小吃街</div>
+        <div class="list-item">和网友见面</div>
+        <div class="list-item">发表成果</div>
+        <div class="list-item">异地恋</div>
+        <div class="list-item">异国恋</div>
+        <div class="list-item">认识不同国籍的人</div>
+        <div class="list-item">创业</div>
+        <div class="list-item">看极光</div>
+        <div class="list-item">进公司工作</div>
+        <div class="list-item">做未来规划</div>
+        <div class="list-item">搬家</div>
+        <div class="list-item">转学</div>
+        <div class="list-item">被骗</div>
+        <div class="list-item">撒谎</div>
+        <div class="list-item">成功改掉一个坏习惯</div>
+        <div class="list-item">加入校队</div>
+        <div class="list-item">坐摩天轮</div>
+        <div class="list-item">在朋友家过夜</div>
+        <div class="list-item">擅长一项运动</div>
+        <div class="list-item">阳过</div>
+        <div class="list-item">三阳</div>
+    </div>
+
+    <script>
+        const listItems = document.querySelectorAll('.list-item');
+        const completeNum = document.getElementById('completeNum');
+        
+        // 点击切换状态+更新计数
+        listItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+                const completedCount = document.querySelectorAll('.list-item.active').length;
+                completeNum.textContent = completedCount;
+            });
+        });
+    </script>
+</body>
+</html>
